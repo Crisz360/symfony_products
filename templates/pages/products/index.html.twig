@@ -1,0 +1,118 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Productos - Todos los Productos
+{% endblock %}
+{% block body %}
+<div class="content-header row">
+    <div class="content-header-left col-md-9 col-12 mb-2">
+        <div class="row breadcrumbs-top">
+            <div class="col-12">
+                <h2 class="content-header-title float-left mb-0">Productos</h2>
+                
+            </div>
+        </div>
+    </div>
+</div>
+{% for message in app.flashes('success') %}
+<div class="alert alert-success mt-4">
+	{{ message }}
+</div>
+{% endfor %}
+<div class="content-body">
+
+    <div class="row" id="basic-table">
+        <div class="col-12">
+            <div class="row col-12">
+                <a href="{{ path('products.add') }}"><button type="button" class="btn btn-flat-primary border-primary text-primary mr-1 mb-1 waves-effect waves-light"><span><i class="feather icon-plus"></i> Nuevo </span></button></a>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Registros</h4>
+                </div>
+                <div class="card-content">
+                    <div class="card-body">
+                        <p class="card-text">Administra los productos que aparecen en el sistema.</p>
+						<div class="count mt-4"><b>Mostrando
+							{{ products.getTotalItemCount }}
+							Producto(s)</b>
+						</div>
+						<br>
+              
+                        <div class="table-responsive">
+							{% if not products.items is same as([]) %}
+								<table class="table table-hover-animation" id="dataTable">
+									<thead>
+										<tr>
+											<th scope="col">Nombre</th>
+											<th scope="col">Descripción</th>
+											<th scope="col">Categoria</th>
+											<th scope="col">Precio</th>
+											<th scope="col">Fecha de creación</th>
+											<th scope="col">Opciones</th>
+										</tr>
+									</thead>
+									<tbody>
+										{% for product in products %}
+											<tr>
+												<td scope="row">{{ product.name }}</td>
+												<td>{{ product.descripcion }}</td>
+												<td>{{ product.category.name }}</td>
+												<td>{{ product.price|number_format(2, '.', ',') }}
+													€
+												</td>
+												<td>{{ product.createdAt|date('d/m/Y') }}</td>
+												<td>
+													<a href="{{ path('products.edit', { id: product.id }) }}" >
+														<span class="action-edit"><i class="feather icon-edit"></i></span>
+													</a>
+													<a data-toggle="modal" data-target="#deletedata{{ product.id }}">
+														<span class="action-edit"><i class="feather icon-trash"></i></span>
+													</a>
+												</td>
+											</tr>
+							
+											<div class="modal text-left" id="deletedata{{ product.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel6" aria-hidden="true">
+															<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+																<div class="modal-content">
+																	<div class="modal-header">
+																		<h4 class="modal-title" id="myModalLabel6">Eliminando {{ product.name }}</h4>
+																		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																			<span aria-hidden="true">&times;</span>
+																		</button>
+																	</div>
+																	<div class="modal-body">
+																		<p>
+                                                                            ¿Estas seguro que deseas eliminar este registro?
+																		</p>
+																		<div class="alert alert-danger" role="alert">
+																			Esto sera eliminado definitivamente.
+																		</div>
+																	</div>
+																	<div class="modal-footer">
+																		<button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancelar</button>
+																		<a href="{{ path('products.delete', { id: product.id }) }}"><button type="button" class="btn btn-primary">Aceptar</button></a>
+																	</div>
+																</div>
+															</div>
+														</div>
+												
+										{% endfor %}
+									</tbody>
+								</table>
+								<div class="navigation d-flex justify-content-center mt-4">
+									{{ knp_pagination_render(products) }}
+								</div>
+								{% else %}
+									
+								{% endif %}
+                       	 	</div>
+               
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

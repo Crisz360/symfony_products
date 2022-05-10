@@ -1,0 +1,57 @@
+{% extends "base.html.twig" %}
+
+{% block title %} Nueva categoría
+{% endblock %}
+
+{% block body %}
+	<div class="content-header row">
+		<div class="content-header-left col-md-9 col-12 mb-2">
+			<div class="row breadcrumbs-top">
+				<div class="col-12">
+					<h2 class="content-header-title float-left mb-0">Nueva Categoría</h2>
+				
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="content-body">
+
+		<div class="row" id="basic-table">
+			<div class="col-12">
+				<div class="row col-12">
+					<a href="{{ path('categories.index') }}"><button type="button" class="btn btn-flat-dark border-dark text-dark mr-1 mb-1 waves-effect waves-light"><span><i class="feather icon-x-circle "></i> Cancelar </span></button></a>
+				</div>
+				<div class="card">
+					<div class="card-header">
+						<h4 class="card-title">Nuevo Registro</h4>
+					</div>
+					<div class="card-content">
+						<div class="card-body">
+							<p class="card-text">Registrar una nueva categoría.</p>
+								<div class="">
+
+									{{ form_start(form) }}
+
+									<div class="form-group">
+										{{ form_label(form.name) }}
+										{{ form_widget(form.name) }}
+										<div class="form-error">
+											{{ form_errors(form.name) }}
+										</div>
+									</div>
+
+									<div class="form-group">
+										{{ form_row(form.submit) }}
+									</div>
+
+								</div>
+								{{ form_end(form) }}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	
+	</div>
+{% endblock %}

@@ -15,7 +15,6 @@
 		</div>
 	</div>
 	<div class="content-body">
-		<!-- Basic Tables start -->
 		<div class="row" id="basic-table">
 			<div class="col-12">
 				<div class="row col-12">
@@ -32,7 +31,7 @@
 
 									{{ form_start(form) }}
 
-									<div class="form-group">
+									<div class="form-group" type="text" onkeypress="return onlyl(event)">
 										{{ form_label(form.name) }}
 										{{ form_widget(form.name) }}
 										<div class="form-error">
@@ -64,7 +63,7 @@
 										</div>
 									</div>
 
-									<div class="form-group">
+									<div class="form-group" type="text" onkeypress="return onlyn(event)" onblur="limpia()" id="miInput">
 										{{ form_label(form.price) }}
 										{{ form_widget(form.price) }}
 										<div class="form-error">
@@ -95,6 +94,62 @@
 				</div>
 			</div>
 		</div>
-		<!-- Basic Tables end -->
 	</div>
+
+	<!-- {# Inicio de Scrip solo para letras #} -->
+		<script>
+			function onlyl(a){
+				key = a.keyCode || e.which;
+				tecla = String.fromCharCode(key).toLowerCase();
+				letras = " áéíóúabcdefghijklmnñopqrstuvwxyz";
+				numbern = "8-37-39-46";
+
+				tecla_esp = false
+				for(var i in numbern){
+						if(key == numbern[i]){
+							tecla_esp = true;
+							break;
+						}
+					}
+
+					if(letras.indexOf(tecla)==-1 && !tecla_esp){
+						return false;
+				}
+			}
+		</script>
+
+	<!-- {# Fin de Scrip solo para letras #} -->
+
+	<!-- {# Inicio de Scrip solo para numeros #} -->
+		<script>
+			function onlyn(a) {
+				key = a.keyCode || a.which;
+				tecla = String.fromCharCode(key).toLowerCase();
+				num = " 0123456789";
+				numbern = [8, 37, 39, 46];
+
+				tecla_esp = false
+				for(var i in numbern) {
+					if(key == numbern[i]) {
+						tecla_esp = true;
+						break;
+					}
+				}
+
+				if(num.indexOf(tecla) == -1 && !tecla_esp)
+					return false;
+			}
+
+			function limpia() {
+				var val = document.getElementById("miInput").value;
+				var tam = val.length;
+				for(i = 0; i < tam; i++) {
+					if(!isNaN(val[i]))
+						document.getElementById("miInput").value = '';
+				}
+			}
+		</script>
+
+	<!-- {# Fin de Scrip solo para numeros #} -->
+
 {% endblock %}

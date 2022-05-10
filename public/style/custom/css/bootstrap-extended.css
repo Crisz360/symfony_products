@@ -2451,7 +2451,7 @@ _:-ms-lang(x),
     .modal .modal-header .close span {
       font-weight: 400;
       font-size: 2rem;
-      color: #7367f0; }
+      color: #da0505; }
     .modal .modal-header .close:hover, .modal .modal-header .close:focus, .modal .modal-header .close:active {
       opacity: 1;
       outline: none;

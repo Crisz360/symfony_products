@@ -1,19 +1,140 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-        {% endblock %}
+<html class="loading" lang="en" data-textdirection="ltr">
+<!-- BEGIN: Head-->
 
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta name="description" content="Vuexy admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
+    <meta name="keywords" content="admin template, Vuexy admin template, dashboard template, flat admin template, responsive admin template, web app">
+    <meta name="author" content="PIXINVENT">
+	<title>
+		{% block title %}CRUD Productos y Categorías
+		{% endblock %}
+	</title>
+	{% block stylesheets %}
+		<link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600" rel="stylesheet">
+		
+		<!-- BEGIN: Vendor CSS-->
+		<link rel="stylesheet" href="{{ asset('style/custom/vendors/css/vendors.min.css') }}">
+		<link rel="stylesheet" href="{{ asset('style/custom/vendors/css/charts/apexcharts.css') }}">
+		<link rel="stylesheet" href="{{ asset('style/custom/vendors/css/extensions/tether-theme-arrows.css') }}">
+		<link rel="stylesheet" href="{{ asset('style/custom/vendors/css/extensions/tether.min.css') }}">
+		<link rel="stylesheet" href="{{ asset('style/custom/vendors/css/extensions/shepherd-theme-default.css') }}">
+		<!-- END: Vendor CSS-->
+
+		<!-- BEGIN: Theme CSS-->
+		<link rel="stylesheet" href="{{ asset('style/custom/css/bootstrap.css') }}">
+		<link rel="stylesheet" href="{{ asset('style/custom/css/bootstrap-extended.css') }}">
+		<link rel="stylesheet" href="{{ asset('style/custom/css/colors.css') }}">
+		<link rel="stylesheet" href="{{ asset('style/custom/css/components.css') }}">
+		<link rel="stylesheet" href="{{ asset('style/custom/css/themes/dark-layout.css') }}">
+		<link rel="stylesheet" href="{{ asset('style/custom/css/themes/semi-dark-layout.css') }}">
+
+		<!-- BEGIN: Page CSS-->
+		<link rel="stylesheet" href="{{ asset('style/custom/css/core/menu/menu-types/vertical-menu.css') }}">
+		<link rel="stylesheet" href="{{ asset('style/custom/css/core/colors/palette-gradient.css') }}">
+		<link rel="stylesheet" href="{{ asset('style/custom/css/pages/dashboard-analytics.css') }}">
+		<link rel="stylesheet" href="{{ asset('style/custom/css/pages/card-analytics.css') }}">
+		<link rel="stylesheet" href="{{ asset('style/custom/css/plugins/tour/tour.css') }}">
+		<!-- END: Page CSS-->
+
+		<!-- BEGIN: Custom CSS-->
+		<link rel="stylesheet" href="/build/style/custom/style.css">
+		<!-- END: Custom CSS-->
+	{% endblock %}
+</head>
+<!-- END: Head-->
+
+<!-- BEGIN: Body-->
+
+<body class="vertical-layout vertical-menu-modern 2-columns  navbar-floating footer-static  " data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
+
+
+	<!--  HEADER -->
+	<nav class="header-navbar navbar-expand-lg navbar navbar-with-menu floating-nav navbar-light navbar-shadow">
+        <div class="navbar-wrapper">
+            <div class="navbar-container content">
+                <div class="navbar-collapse" id="navbar-mobile">
+                    <div class="mr-auto float-left bookmark-wrapper d-flex align-items-center">
+                      
+                    </div>
+                    <ul class="nav navbar-nav float-right">
+                        <li class="nav-item d-none d-lg-block"></li>
+                        <li class="dropdown dropdown-user nav-item"><a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
+                                <div class="user-nav d-sm-flex d-none"><span class="user-name text-bold-600">Cristhian Hernandez</span><span class="user-status">Usuario</span></div><span></span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+	<!-- MENU-->
+	<div class="main-menu menu-fixed menu-light menu-accordion menu-shadow" data-scroll-to-active="true">
+        <div class="navbar-header">
+            <ul class="nav navbar-nav flex-row">
+                <li class="nav-item mr-auto"><a class="navbar-brand">
+                        <div class="brand-logo"></div>
+                        <h2 class="brand-text mb-0">Menú</h2>
+                    </a></li>
+            </ul>
+        </div>
+        <div class="shadow-bottom"></div>
+        <div class="main-menu-content">
+			<ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
+                <li class=" nav-item"><a href="{{ path('products.index') }}"><i class="feather icon-shopping-cart"></i><span class="menu-title" data-i18n="Dashboard">Productos</span></a>
+                </li>
+            </ul>
+            <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
+                <li class=" nav-item"><a href="{{ path('categories.index') }}"><i class="feather icon-check-square"></i><span class="menu-title" data-i18n="Dashboard">Categorías</span></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- BEGIN: Content-->
+    <div class="app-content content">
+        <div class="content-overlay"></div>
+        <div class="header-navbar-shadow"></div>
+        <div class="content-wrapper">
+            <div class="content-header row">
+            </div>
+            <div class="content-body">
+				{% block body %}{% endblock %}
+            </div>
+        </div>
+    </div>
+    <!-- END: Content-->
+
+    <div class="sidenav-overlay"></div>
+    <div class="drag-target"></div>
+
+   
+
+	{% block javascripts %}
+			
+			<!-- BEGIN: Vendor JS-->
+			<script src="{{ asset('style/custom/vendors/js/vendors.min.js') }}"></script>
+			<!-- BEGIN Vendor JS-->
+
+			<!-- BEGIN: Page Vendor JS-->
+			<script src="{{ asset('style/custom/vendors/js/charts/apexcharts.min.js') }}"></script>
+			<script src="{{ asset('style/custom/vendors/js/extensions/tether.min.js') }}"></script>
+			<!-- END: Page Vendor JS-->
+
+			<!-- BEGIN: Theme JS-->
+			<script src="{{ asset('style/custom/js/core/app-menu.js') }}"></script>
+			<script src="{{ asset('style/custom/js/core/app.js') }}"></script>
+			<script src="{{ asset('style/custom/js/scripts/components.js') }}"></script>
+			<!-- END: Theme JS-->
+
+			<!-- BEGIN: Page JS-->
+			<script src="{{ asset('style/custom/js/scripts/pages/dashboard-analytics.js') }}"></script>
+			<!-- END: Page JS-->
+	{% endblock %}
+</body>
+<!-- END: Body-->
+
 </html>

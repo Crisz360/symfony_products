@@ -14,7 +14,6 @@
 		</div>
 	</div>
 	<div class="content-body">
-		
 		<div class="row" id="basic-table">
 			<div class="col-12">
 				<div class="row col-12">
@@ -28,9 +27,7 @@
 						<div class="card-body">
 							<p class="card-text">Editar Registro.</p>
 								<div class="">
-
 									{{ form_start(form) }}
-
 									<div class="form-group" type="text" onkeypress="return onlyl(event)">
 										{{ form_label(form.name) }}
 										{{ form_widget(form.name) }}
@@ -38,11 +35,9 @@
 											{{ form_errors(form.name) }}
 										</div>
 									</div>
-
 									<div class="form-group">
 										{{ form_row(form.submit) }}
 									</div>
-
 								</div>
 								{{ form_end(form) }}
 							</div>
@@ -74,39 +69,5 @@
 				}
 			}
 		</script>
-
 	<!-- {# Fin de Scrip solo para letras #} -->
-
-	<!-- {# Inicio de Scrip solo para numeros #} -->
-		<script>
-			function onlyn(a) {
-				key = a.keyCode || a.which;
-				tecla = String.fromCharCode(key).toLowerCase();
-				num = " 0123456789";
-				numbern = [8, 37, 39, 46];
-
-				tecla_esp = false
-				for(var i in numbern) {
-					if(key == numbern[i]) {
-						tecla_esp = true;
-						break;
-					}
-				}
-
-				if(num.indexOf(tecla) == -1 && !tecla_esp)
-					return false;
-			}
-
-			function limpia() {
-				var val = document.getElementById("miInput").value;
-				var tam = val.length;
-				for(i = 0; i < tam; i++) {
-					if(!isNaN(val[i]))
-						document.getElementById("miInput").value = '';
-				}
-			}
-		</script>
-
-	<!-- {# Fin de Scrip solo para numeros #} -->
-
 {% endblock %}
